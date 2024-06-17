@@ -15,7 +15,7 @@ jobs:
         run: yarn install
 
       # Acme CRM Component
-      - name: Change directory
+      - name: Change directory to Acme CRM
         run: cd components/acme-crm
       - name: Build Acme CRM Component
         run: yarn build
@@ -24,10 +24,13 @@ jobs:
         with:
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
+      - name: Change directory back
+        run: cd -
 
-      # Acme CRM Component
+      # Hooli CRM Component
+      - name: Change directory to Hooli CRM
+        run: cd components/hooli-crm
       - name: Build Hooli CRM Component
-        working-directory: components/hooli-crm
         run: yarn build
       - name: Publish Hooli CRM Component
         uses: prismatic-io/component-publisher@v1.0
@@ -35,3 +38,5 @@ jobs:
         with:
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
+      - name: Change directory back
+        run: cd -
