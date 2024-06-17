@@ -1,0 +1,83 @@
+category: ''
+configPages:
+  - elements: []
+    name: Configuration
+defaultInstanceProfile: Default Instance Profile
+definitionVersion: 7
+description: ''
+documentation: ''
+endpointType: flow_specific
+flows:
+  - description: ''
+    endpointSecurityType: customer_optional
+    isSynchronous: true
+    name: Get Hooli Posts
+    steps:
+      - action:
+          key: webhook
+          component:
+            isPublic: true
+            key: webhook-triggers
+            version: LATEST
+        description: ''
+        inputs:
+          body:
+            type: value
+            value: ''
+          contentType:
+            type: value
+            value: ''
+          headers:
+            type: complex
+            value: []
+          statusCode:
+            type: value
+            value: ''
+        isTrigger: true
+        name: Get Hooli Posts Trigger
+      - action:
+          key: listPosts
+          component:
+            isPublic: false
+            key: hooli-crm
+            version: LATEST
+        description: ''
+        inputs: {}
+        name: List Posts
+  - description: ''
+    endpointSecurityType: customer_optional
+    isSynchronous: true
+    name: Get Acme Users
+    steps:
+      - action:
+          key: webhook
+          component:
+            isPublic: true
+            key: webhook-triggers
+            version: LATEST
+        description: ''
+        inputs:
+          body:
+            type: value
+            value: ''
+          contentType:
+            type: value
+            value: ''
+          headers:
+            type: complex
+            value: []
+          statusCode:
+            type: value
+            value: ''
+        isTrigger: true
+        name: Get Acme Users Trigger
+      - action:
+          key: listUsers
+          component:
+            isPublic: false
+            key: acme-crm
+            version: LATEST
+        description: ''
+        inputs: {}
+        name: List Users
+name: Hooli - Acme Integration
