@@ -13,3 +13,9 @@ jobs:
       - uses: actions/setup-node@v4.0.2
       - name: Install dependencies
         run: yarn install
+      - name: Build Acme CRM Component
+        working-directory: components/acme-crm
+        run: yarn build
+      - name: Build Hooli CRM Component
+        working-directory: components/hooli-crm
+        run: yarn build
