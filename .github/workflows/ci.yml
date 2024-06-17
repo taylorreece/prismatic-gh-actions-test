@@ -34,7 +34,6 @@ jobs:
         run: yarn build
       - name: Publish Hooli CRM Component
         uses: prismatic-io/component-publisher@v1.0
-        working-directory: components/hooli-crm
         with:
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
