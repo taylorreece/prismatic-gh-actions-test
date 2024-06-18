@@ -1,13 +1,20 @@
-import { action, component } from "@prismatic-io/spectral";
+import { action, component, input, util } from "@prismatic-io/spectral";
 
 const listUsers = action({
   display: {
     label: "List Users",
     description: "List all users in the system",
   },
-  inputs: {},
+  inputs: {
+    endpoint: input({
+      type: "string",
+      default: "https://jsonplaceholder.typicode.com/users",
+      label: "Users Endpoint",
+      clean: util.types.toString,
+    }),
+  },
   perform: async (context, params) => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const response = await fetch(params.endpoint);
     const users = await response.json();
     return { data: users };
   },
