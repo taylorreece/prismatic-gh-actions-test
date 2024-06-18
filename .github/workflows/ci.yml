@@ -25,11 +25,31 @@ jobs:
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
 
-      # # Hooli CRM Component
-      # - name: Build Hooli CRM Component
-      #   run: yarn build
-      # - name: Publish Hooli CRM Component
-      #   uses: prismatic-io/component-publisher@v1.0
-      #   with:
-      #     PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
-      #     PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
+  hooli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4.0.2
+      - name: Install dependencies
+        run: yarn install
+      - name: Build Hooli CRM Component
+        run: yarn build
+      - name: Publish Hooli CRM Component
+        uses: prismatic-io/component-publisher@add-component-path-input
+        with:
+          COMPONENT_PATH: components/hooli-crm
+          PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
+          PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
+
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish Integration Component
+        uses: prismatic-io/integration-publisher@v1.0
+        with:
+          PATH_TO_YML: integrations/hooli-acme-integration.yml
+          PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
+          PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
+          INTEGRATION_ID: SW50ZWdyYXRpb246MzZiNzBlNjQtNjEyZS00YzQ2LWJiZGYtNjRmNGJjNDBiMTg2
+          MAKE_AVAILABLE_IN_MARKETPLACE: true
