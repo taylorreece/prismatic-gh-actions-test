@@ -1,4 +1,4 @@
-name: CI
+name: Acme-Hooli Integration CI
 
 on:
   push:
