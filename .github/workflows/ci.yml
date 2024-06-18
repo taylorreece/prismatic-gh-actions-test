@@ -53,5 +53,5 @@ jobs:
           PATH_TO_YML: integrations/hooli-acme-integration.yml
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
-          INTEGRATION_ID: SW50ZWdyYXRpb246MzZiNzBlNjQtNjEyZS00YzQ2LWJiZGYtNjRmNGJjNDBiMTg2
+          INTEGRATION_ID: ${{ vars.ACME_HOOLI_INTEGRATION_ID_US_PROD}}
           MAKE_AVAILABLE_IN_MARKETPLACE: true
