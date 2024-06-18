@@ -1,14 +1,14 @@
-category: ''
+category: ""
 configPages:
   - elements: []
     name: Configuration
 defaultInstanceProfile: Default Instance Profile
 definitionVersion: 7
-description: ''
-documentation: ''
+description: ""
+documentation: ""
 endpointType: flow_specific
 flows:
-  - description: ''
+  - description: ""
     endpointSecurityType: customer_optional
     isSynchronous: true
     name: Get Hooli Posts
@@ -19,20 +19,20 @@ flows:
             isPublic: true
             key: webhook-triggers
             version: LATEST
-        description: ''
+        description: ""
         inputs:
           body:
             type: value
-            value: ''
+            value: ""
           contentType:
             type: value
-            value: ''
+            value: ""
           headers:
             type: complex
             value: []
           statusCode:
             type: value
-            value: ''
+            value: ""
         isTrigger: true
         name: Get Hooli Posts Trigger
       - action:
@@ -41,10 +41,10 @@ flows:
             isPublic: false
             key: hooli-crm
             version: LATEST
-        description: ''
+        description: ""
         inputs: {}
         name: List Posts
-  - description: ''
+  - description: ""
     endpointSecurityType: customer_optional
     isSynchronous: true
     name: Get Acme Users
@@ -55,20 +55,20 @@ flows:
             isPublic: true
             key: webhook-triggers
             version: LATEST
-        description: ''
+        description: ""
         inputs:
           body:
             type: value
-            value: ''
+            value: ""
           contentType:
             type: value
-            value: ''
+            value: ""
           headers:
             type: complex
             value: []
           statusCode:
             type: value
-            value: ''
+            value: ""
         isTrigger: true
         name: Get Acme Users Trigger
       - action:
@@ -77,7 +77,7 @@ flows:
             isPublic: false
             key: acme-crm
             version: LATEST
-        description: ''
+        description: ""
         inputs: {}
         name: List Users
 name: Hooli - Acme Integration
