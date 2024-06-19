@@ -18,7 +18,7 @@ jobs:
         run: yarn build
         working-directory: components/acme-crm
       - name: Publish Acme CRM Component
-        uses: prismatic-io/component-publisher@add-component-path-input
+        uses: prismatic-io/component-publisher@v1.1
         with:
           COMPONENT_PATH: components/acme-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
@@ -36,7 +36,7 @@ jobs:
         run: yarn build
         working-directory: components/hooli-crm
       - name: Publish Hooli CRM Component
-        uses: prismatic-io/component-publisher@add-component-path-input
+        uses: prismatic-io/component-publisher@v1.1
         with:
           COMPONENT_PATH: components/hooli-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
@@ -49,7 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Publish Integration Component
-        uses: prismatic-io/integration-publisher@v1.0
+        uses: prismatic-io/integration-publisher@v1.1
         with:
           PATH_TO_YML: integrations/hooli-acme-integration.yml
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
