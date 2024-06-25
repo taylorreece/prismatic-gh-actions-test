@@ -42,18 +42,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3.0.2
+        with:
+          filters: |
+            hooli_component:
+              - 'components/hooli-crm/**'
       - uses: actions/setup-node@v4.0.2
+        if: steps.filter.outputs.hooli_component == 'true'
       - name: Install dependencies
         run: yarn install
+        if: steps.filter.outputs.hooli_component == 'true'
       - name: Build Hooli CRM Component
         run: yarn build
         working-directory: components/hooli-crm
+        if: steps.filter.outputs.hooli_component == 'true'
       - name: Publish Hooli CRM Component
         uses: prismatic-io/component-publisher@v1.1
         with:
           COMPONENT_PATH: components/hooli-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
+        if: steps.filter.outputs.hooli_component == 'true'
+      - name: Note that component didn't change
+        run: echo "No changes detected for Hooli CRM component"
+        if: steps.filter.outputs.hooli_component != 'true'
 
   # Publish Acme-Hooli integration after components are published
   acme_hooli_integration:
@@ -61,6 +74,13 @@ jobs:
     needs: [acme_component, hooli_component]
     steps:
       - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3.0.2
+        with:
+          filters: |
+            integration_or_components:
+              - 'integrations/hooli-acme-integration.yml'
+              - 'components/**'
       - name: Publish Integration Component
         uses: prismatic-io/integration-publisher@v1.1
         with:
@@ -69,3 +89,7 @@ jobs:
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
           INTEGRATION_ID: ${{ vars.ACME_HOOLI_INTEGRATION_ID_US_PROD}}
           MAKE_AVAILABLE_IN_MARKETPLACE: false
+        if: steps.filter.outputs.integration_file == 'true'
+      - name: Note that integration didn't change
+        run: echo "No changes detected for Hooli CRM component"
+        if: steps.filter.outputs.integration_or_components != 'true'
