@@ -34,7 +34,8 @@ jobs:
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
         if: steps.filter.outputs.acme_component == 'true'
       - name: Note that component didn't change
-        run: echo "No changes detected for Acme CRM component"
+        run: |
+          echo "No changes detected for Acme component" >> "$GITHUB_STEP_SUMMARY"
         if: steps.filter.outputs.acme_component != 'true'
 
   # Build and publish Hooli CRM component
@@ -65,7 +66,8 @@ jobs:
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
         if: steps.filter.outputs.hooli_component == 'true'
       - name: Note that component didn't change
-        run: echo "No changes detected for Hooli CRM component"
+        run: |
+          echo "No changes detected for Hooli component" >> "$GITHUB_STEP_SUMMARY"
         if: steps.filter.outputs.hooli_component != 'true'
 
   # Publish Acme-Hooli integration after components are published
@@ -91,5 +93,6 @@ jobs:
           MAKE_AVAILABLE_IN_MARKETPLACE: false
         if: steps.filter.outputs.integration_file == 'true'
       - name: Note that integration didn't change
-        run: echo "No changes detected for Hooli CRM component"
+        run: |
+          echo "No changes detected for integration or underlying components" >> "$GITHUB_STEP_SUMMARY"
         if: steps.filter.outputs.integration_or_components != 'true'
