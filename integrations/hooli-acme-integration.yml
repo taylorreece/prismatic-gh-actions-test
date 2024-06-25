@@ -103,7 +103,7 @@ flows:
                 {"foo": "bar", "baz": 123}, you could destructure that data with:
                   const { foo, baz } = stepResults.getDataFromApi.results;
 
-                You can return string, number or complex object data. e.g.a
+                You can return string, number or complex object data. e.g.
                   return { data: { foo: "Hello", bar: 123.45, baz: true } };
               */
 
