@@ -91,7 +91,7 @@ jobs:
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
           INTEGRATION_ID: ${{ vars.ACME_HOOLI_INTEGRATION_ID_US_PROD}}
           MAKE_AVAILABLE_IN_MARKETPLACE: false
-        if: steps.filter.outputs.integration_file == 'true'
+        if: steps.filter.outputs.integration_or_components == 'true'
       - name: Note that integration didn't change
         run: |
           echo "No changes detected for integration or underlying components" >> "$GITHUB_STEP_SUMMARY"
