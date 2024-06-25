@@ -11,18 +11,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3.0.2
+        with:
+          filters: |
+            acme_component:
+              - 'components/acme-crm/**'
       - uses: actions/setup-node@v4.0.2
+        if: steps.filter.outputs.acme_component == 'true'
       - name: Install dependencies
         run: yarn install
+        if: steps.filter.outputs.acme_component == 'true'
       - name: Build Acme CRM Component
         run: yarn build
         working-directory: components/acme-crm
+        if: steps.filter.outputs.acme_component == 'true'
       - name: Publish Acme CRM Component
         uses: prismatic-io/component-publisher@v1.1
         with:
           COMPONENT_PATH: components/acme-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
+        if: steps.filter.outputs.acme_component == 'true'
+      - name: Note that component didn't change
+        run: echo "No changes detected for Acme CRM component"
+        if: steps.filter.outputs.acme_component != 'true'
 
   # Build and publish Hooli CRM component
   hooli_component:
