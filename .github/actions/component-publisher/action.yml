@@ -174,13 +174,12 @@ runs:
           COMMAND="$COMMAND --repoUrl=${{ github.repository }}"
         fi
 
-        if [ "${{ inputs.SKIP_PULL_REQUEST_URL_PUBLISH }}" = "false" ]; then
+        if [ "${{ inputs.SKIP_PULL_REQUEST_URL_PUBLISH }}" = "false" ] && [ -n "${{ steps.pr-details.outputs.PR_URL }}" ]; then
           COMMAND="$COMMAND --pullRequestUrl=${{ steps.pr-details.outputs.PR_URL }}"
         fi
 
         if [ -n "${{ inputs.COMMENT }}" ]; then
-          COMMENT="${{ inputs.COMMENT }}"
-          COMMAND="$COMMAND --comment=\"$COMMENT\""
+          COMMAND="$COMMAND --comment=\"${{ inputs.COMMENT }}\""
         fi
 
         if [ -n "${{ inputs.CUSTOMER_ID }}" ]; then
