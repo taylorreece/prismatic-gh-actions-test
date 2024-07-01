@@ -179,7 +179,7 @@ runs:
         fi
 
         if [ -n "${{ inputs.COMMENT }}" ]; then
-          COMMAND="$COMMAND --comment=\"${{ inputs.COMMENT }}\""
+          COMMAND="$COMMAND --comment='${{ inputs.COMMENT }}'"
         fi
 
         if [ -n "${{ inputs.CUSTOMER_ID }}" ]; then
@@ -187,7 +187,7 @@ runs:
         fi
 
         log $INFO "Running command: $COMMAND"
-        OUTPUT=$("$COMMAND") 2>&1
+        OUTPUT=$($COMMAND 2>&1)
 
         if echo "$OUTPUT" | grep -q "Package signatures match, skipping publish"; then
           echo "PUBLISH_SKIPPED=true" >> $GITHUB_OUTPUT
