@@ -151,43 +151,40 @@ runs:
       id: prism-publish
       shell: bash
       run: |
-        set -ex
         source $GITHUB_WORKSPACE/logger.sh
 
         if [ -n "${{ inputs.COMPONENT_PATH }}" ]; then
           cd ${{ inputs.COMPONENT_PATH }}
         fi
 
-        COMMAND="prism components:publish \
-        --skip-on-signature-match \
-        --no-confirm"
+        COMMAND=(prism components:publish --skip-on-signature-match --no-confirm)
 
         if [ "${{ inputs.SKIP_COMMIT_HASH_PUBLISH }}" = "false" ]; then
-          COMMAND="$COMMAND --commitHash=${{ steps.commit-details.outputs.COMMIT_HASH }}"
+          COMMAND+=("--commitHash=${{ steps.commit-details.outputs.COMMIT_HASH }}")
         fi
 
         if [ "${{ inputs.SKIP_COMMIT_URL_PUBLISH }}" = "false" ]; then
-          COMMAND="$COMMAND --commitUrl=${{ steps.commit-details.outputs.COMMIT_URL }}"
+          COMMAND+=("--commitUrl=${{ steps.commit-details.outputs.COMMIT_URL }}")
         fi
 
         if [ "${{ inputs.SKIP_REPO_URL_PUBLISH }}" = "false" ]; then
-          COMMAND="$COMMAND --repoUrl=${{ github.repository }}"
+          COMMAND+=("--repoUrl=${{ github.repository }}")
         fi
 
         if [ "${{ inputs.SKIP_PULL_REQUEST_URL_PUBLISH }}" = "false" ]; then
-          COMMAND="$COMMAND --pullRequestUrl=${{ steps.pr-details.outputs.PR_URL }}"
+          COMMAND+=("--pullRequestUrl=${{ steps.pr-details.outputs.PR_URL }}")
         fi
 
         if [ -n "${{ inputs.COMMENT }}" ]; then
-          COMMAND="$COMMAND --comment='${{ inputs.COMMENT }}'"
+          COMMAND+=("--comment=\"${{ inputs.COMMENT }}\"")
         fi
 
         if [ -n "${{ inputs.CUSTOMER_ID }}" ]; then
-          COMMAND="$COMMAND --customer=${{ inputs.CUSTOMER_ID }}"
+          COMMAND+="--customer=${{ inputs.CUSTOMER_ID }}"
         fi
 
         log $INFO "Running command: $COMMAND"
-        OUTPUT=$($COMMAND 2>&1)
+        OUTPUT=$(${COMMAND[@]} 2>&1)
 
         if echo "$OUTPUT" | grep -q "Package signatures match, skipping publish"; then
           echo "PUBLISH_SKIPPED=true" >> $GITHUB_OUTPUT
