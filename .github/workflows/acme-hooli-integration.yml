@@ -27,7 +27,7 @@ jobs:
         working-directory: components/acme-crm
         if: steps.filter.outputs.acme_component == 'true'
       - name: Publish Acme CRM Component
-        uses: ./.github/actions/component-publisher
+        uses: ./.github/actions/component-publisher@main
         with:
           COMPONENT_PATH: components/acme-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
