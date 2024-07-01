@@ -180,11 +180,13 @@ runs:
         fi
 
         if [ -n "${{ inputs.CUSTOMER_ID }}" ]; then
-          COMMAND+="--customer=${{ inputs.CUSTOMER_ID }}"
+          COMMAND+=("--customer=${{ inputs.CUSTOMER_ID }}")
         fi
 
-        log $INFO "Running command: $COMMAND"
-        OUTPUT=$(${COMMAND[@]} 2>&1)
+        COMMAND+=("2>&1")
+
+        log $INFO "Running command: ${COMMAND[@]}"
+        OUTPUT=${COMMAND[@]}
 
         if echo "$OUTPUT" | grep -q "Package signatures match, skipping publish"; then
           echo "PUBLISH_SKIPPED=true" >> $GITHUB_OUTPUT
