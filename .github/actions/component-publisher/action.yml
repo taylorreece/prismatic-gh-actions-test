@@ -184,10 +184,8 @@ runs:
           COMMAND+=("--customer=${{ inputs.CUSTOMER_ID }}")
         fi
 
-        COMMAND+=("2>&1")
-
         log $INFO "Running command: ${COMMAND[@]}"
-        OUTPUT=$(${COMMAND[@]})
+        OUTPUT=$("${COMMAND[@]} 2>&1")
 
         if echo "$OUTPUT" | grep -q "Package signatures match, skipping publish"; then
           echo "PUBLISH_SKIPPED=true" >> $GITHUB_OUTPUT

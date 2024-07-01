@@ -19,7 +19,7 @@ export default component({
   display: {
     label: "Hooli CRM",
     description:
-      "Placeholder component for Hooli to demonstrate GitHub actions..",
+      "Placeholder component for Hooli to demonstrate GitHub actions...",
     iconPath: "icon.png",
   },
   actions: { listPosts },
