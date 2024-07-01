@@ -26,8 +26,6 @@ jobs:
         run: yarn build
         working-directory: components/acme-crm
         if: steps.filter.outputs.acme_component == 'true'
-      - name: List files
-        run: ls -a /home/runner/work/prismatic-gh-actions-test/prismatic-gh-actions-test/
       - name: Publish Acme CRM Component
         uses: ./.github/actions/component-publisher
         with:
