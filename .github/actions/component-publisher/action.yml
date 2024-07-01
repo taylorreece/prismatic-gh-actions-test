@@ -151,6 +151,7 @@ runs:
       id: prism-publish
       shell: bash
       run: |
+        set -ex
         source $GITHUB_WORKSPACE/logger.sh
 
         if [ -n "${{ inputs.COMPONENT_PATH }}" ]; then
