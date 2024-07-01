@@ -174,7 +174,7 @@ runs:
           COMMAND="$COMMAND --repoUrl=${{ github.repository }}"
         fi
 
-        if [ "${{ inputs.SKIP_PULL_REQUEST_URL_PUBLISH }}" = "false" ] && [ -n "${{ steps.pr-details.outputs.PR_URL }}" ]; then
+        if [ "${{ inputs.SKIP_PULL_REQUEST_URL_PUBLISH }}" = "false" ]; then
           COMMAND="$COMMAND --pullRequestUrl=${{ steps.pr-details.outputs.PR_URL }}"
         fi
 
@@ -187,7 +187,7 @@ runs:
         fi
 
         log $INFO "Running command: $COMMAND"
-        OUTPUT=$(eval $COMMAND 2>&1)
+        OUTPUT=eval $COMMAND 2>&1
 
         if echo "$OUTPUT" | grep -q "Package signatures match, skipping publish"; then
           echo "PUBLISH_SKIPPED=true" >> $GITHUB_OUTPUT
