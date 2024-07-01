@@ -25,7 +25,8 @@ export default component({
   public: false,
   display: {
     label: "Acme CRM",
-    description: "Placeholder component for Acme to demonstrate GitHub actions",
+    description:
+      "Placeholder component for Acme to demonstrate GitHub actions..",
     iconPath: "icon.png",
   },
   actions: { listUsers },
