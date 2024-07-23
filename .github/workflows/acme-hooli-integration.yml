@@ -27,7 +27,7 @@ jobs:
         working-directory: components/acme-crm
         if: steps.filter.outputs.acme_component == 'true'
       - name: Publish Acme CRM Component
-        uses: ./.github/actions/component-publisher
+        uses: prismatic-io/component-publisher@v1.3
         with:
           COMPONENT_PATH: components/acme-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
@@ -60,7 +60,7 @@ jobs:
         working-directory: components/hooli-crm
         if: steps.filter.outputs.hooli_component == 'true'
       - name: Publish Hooli CRM Component
-        uses: prismatic-io/component-publisher@v1.1
+        uses: prismatic-io/component-publisher@v1.3
         with:
           COMPONENT_PATH: components/hooli-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
@@ -85,15 +85,48 @@ jobs:
               - 'integrations/hooli-acme-integration.yml'
               - 'components/**'
       - name: Publish Integration Component
-        uses: prismatic-io/integration-publisher@v1.1
+        uses: prismatic-io/integration-publisher@v1.3
         with:
           PATH_TO_YML: integrations/hooli-acme-integration.yml
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
-          INTEGRATION_ID: ${{ vars.ACME_HOOLI_INTEGRATION_ID_US_PROD}}
+          INTEGRATION_ID: ${{ vars.ACME_HOOLI_INTEGRATION_ID_US_PROD }}
           MAKE_AVAILABLE_IN_MARKETPLACE: false
         if: steps.filter.outputs.integration_or_components == 'true'
       - name: Note that integration didn't change
         run: |
           echo "No changes detected for integration or underlying components" >> "$GITHUB_STEP_SUMMARY"
         if: steps.filter.outputs.integration_or_components != 'true'
+
+  acme_code_native_integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3.0.2
+        with:
+          filters: |
+            acme_code_native_integration:
+              - 'integrations/acme-code-native/**'
+      - uses: actions/setup-node@v4.0.2
+        if: steps.filter.outputs.acme_code_native_integration == 'true'
+      - name: Install dependencies
+        run: yarn install
+        if: steps.filter.outputs.acme_code_native_integration == 'true'
+      - name: Build Hooli CRM Component
+        run: yarn build
+        working-directory: components/hooli-crm
+        if: steps.filter.outputs.acme_code_native_integration == 'true'
+      - name: Publish Integration Component
+        uses: prismatic-io/integration-publisher@v1.3
+        with:
+          PATH_TO_CNI: integrations/acme-code-native
+          PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
+          PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
+          INTEGRATION_ID: ${{ vars.ACME_CODE_NATIVE_INTEGRATION_ID_US_PROD }}
+          MAKE_AVAILABLE_IN_MARKETPLACE: false
+        if: steps.filter.outputs.acme_code_native_integration == 'true'
+      - name: Note that integration didn't change
+        run: |
+          echo "No changes detected for integration" >> "$GITHUB_STEP_SUMMARY"
+        if: steps.filter.outputs.acme_code_native_integration != 'true'

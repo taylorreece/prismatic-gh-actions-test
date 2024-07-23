@@ -11,10 +11,12 @@
   },
   "eslintConfig": {
     "root": true,
-    "extends": ["@prismatic-io/eslint-config-spectral"]
+    "extends": [
+      "@prismatic-io/eslint-config-spectral"
+    ]
   },
   "dependencies": {
-    "@prismatic-io/spectral": "8.1.7"
+    "@prismatic-io/spectral": "9.0.4"
   },
   "devDependencies": {
     "@prismatic-io/eslint-config-spectral": "2.0.1",
