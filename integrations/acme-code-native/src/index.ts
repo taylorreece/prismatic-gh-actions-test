@@ -8,7 +8,7 @@ export { componentRegistry } from "./componentRegistry";
 
 export default integration({
   name: "acme-code-native",
-  description: "Prism-generated Integration",
+  description: "My Code-Native Integration",
   iconPath: "icon.png",
   flows,
   configPages,

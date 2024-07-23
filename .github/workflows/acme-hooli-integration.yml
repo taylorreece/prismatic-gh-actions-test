@@ -34,7 +34,7 @@ jobs:
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
           COMMENT: This is another comment 2
         if: steps.filter.outputs.acme_component == 'true'
-      - name: Note that component didn't change
+      - name: Note if component didn't change
         run: |
           echo "No changes detected for Acme component" >> "$GITHUB_STEP_SUMMARY"
         if: steps.filter.outputs.acme_component != 'true'
@@ -66,7 +66,7 @@ jobs:
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
         if: steps.filter.outputs.hooli_component == 'true'
-      - name: Note that component didn't change
+      - name: Note if component didn't change
         run: |
           echo "No changes detected for Hooli component" >> "$GITHUB_STEP_SUMMARY"
         if: steps.filter.outputs.hooli_component != 'true'
@@ -93,7 +93,7 @@ jobs:
           INTEGRATION_ID: ${{ vars.ACME_HOOLI_INTEGRATION_ID_US_PROD }}
           MAKE_AVAILABLE_IN_MARKETPLACE: false
         if: steps.filter.outputs.integration_or_components == 'true'
-      - name: Note that integration didn't change
+      - name: Note if integration didn't change
         run: |
           echo "No changes detected for integration or underlying components" >> "$GITHUB_STEP_SUMMARY"
         if: steps.filter.outputs.integration_or_components != 'true'
@@ -113,9 +113,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
         if: steps.filter.outputs.acme_code_native_integration == 'true'
-      - name: Build Hooli CRM Component
+      - name: Build Code-Native Integration
         run: yarn build
-        working-directory: components/hooli-crm
+        working-directory: integrations/acme-code-native
         if: steps.filter.outputs.acme_code_native_integration == 'true'
       - name: Publish Integration Component
         uses: prismatic-io/integration-publisher@v1.3
@@ -126,7 +126,7 @@ jobs:
           INTEGRATION_ID: ${{ vars.ACME_CODE_NATIVE_INTEGRATION_ID_US_PROD }}
           MAKE_AVAILABLE_IN_MARKETPLACE: false
         if: steps.filter.outputs.acme_code_native_integration == 'true'
-      - name: Note that integration didn't change
+      - name: Note if integration didn't change
         run: |
           echo "No changes detected for integration" >> "$GITHUB_STEP_SUMMARY"
         if: steps.filter.outputs.acme_code_native_integration != 'true'
