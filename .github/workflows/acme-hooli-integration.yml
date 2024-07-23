@@ -85,7 +85,7 @@ jobs:
               - 'integrations/hooli-acme-integration.yml'
               - 'components/**'
       - name: Publish Integration Component
-        uses: prismatic-io/integration-publisher@v1.3
+        uses: prismatic-io/integration-publisher@tr/log-paths-correctly
         with:
           PATH_TO_YML: integrations/hooli-acme-integration.yml
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
@@ -117,8 +117,8 @@ jobs:
         run: yarn build
         working-directory: integrations/acme-code-native
         if: steps.filter.outputs.acme_code_native_integration == 'true'
-      - name: Publish Integration Component
-        uses: prismatic-io/integration-publisher@v1.3
+      - name: Publish Integration
+        uses: prismatic-io/integration-publisher@tr/log-paths-correctly
         with:
           PATH_TO_CNI: integrations/acme-code-native
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}

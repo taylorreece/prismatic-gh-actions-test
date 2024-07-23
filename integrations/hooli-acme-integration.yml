@@ -100,7 +100,7 @@ flows:
 
                 Access previous steps' results through the stepResults object. Trigger
                 and step names are camelCased. If the step "Get Data from API" returned
-                {"foo": "bar", "baz": 123}, you could destructure that data with:
+                {"foo": "bar", "baz": 123}, you could destructure that data with this:
                   const { foo, baz } = stepResults.getDataFromApi.results;
 
                 You can return string, number or complex object data. e.g.a
