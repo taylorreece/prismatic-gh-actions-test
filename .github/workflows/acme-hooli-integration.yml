@@ -17,7 +17,7 @@ jobs:
           filters: |
             acme_component:
               - 'components/acme-crm/**'
-      - uses: actions/setup-node@v4.0.2
+      - uses: actions/setup-node@v4.0.3
         if: steps.filter.outputs.acme_component == 'true'
       - name: Install dependencies
         run: yarn install
@@ -50,7 +50,7 @@ jobs:
           filters: |
             hooli_component:
               - 'components/hooli-crm/**'
-      - uses: actions/setup-node@v4.0.2
+      - uses: actions/setup-node@v4.0.3
         if: steps.filter.outputs.hooli_component == 'true'
       - name: Install dependencies
         run: yarn install
@@ -108,7 +108,7 @@ jobs:
           filters: |
             acme_code_native_integration:
               - 'integrations/acme-code-native/**'
-      - uses: actions/setup-node@v4.0.2
+      - uses: actions/setup-node@v4.0.3
         if: steps.filter.outputs.acme_code_native_integration == 'true'
       - name: Install dependencies
         run: yarn install
