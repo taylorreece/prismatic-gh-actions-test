@@ -98,7 +98,7 @@ flows:
                 Access config variables by name through the configVars object. e.g.
                   const apiEndpoint = `${configVars["App Base URL"]}/api`;
 
-                Access previous steps' results through the stepResults object. Trigger
+                Access previous steps results through the stepResults object. Trigger
                 and step names are camelCased. If the step "Get Data from API" returned
                 {"foo": "bar", "baz": 123}, you could destructure that data with this:
                   const { foo, baz } = stepResults.getDataFromApi.results;
