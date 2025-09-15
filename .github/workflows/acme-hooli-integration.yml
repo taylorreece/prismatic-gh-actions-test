@@ -32,7 +32,10 @@ jobs:
           COMPONENT_PATH: components/acme-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.PRISM_REFRESH_TOKEN }}
-          COMMENT: This is another comment 2
+          SKIP_COMMIT_HASH_PUBLISH: false
+          SKIP_COMMIT_URL_PUBLISH: false
+          SKIP_REPO_URL_PUBLISH: false
+          SKIP_PULL_REQUEST_URL_PUBLISH: false
         if: steps.filter.outputs.acme_component == 'true'
       - name: Note if component didn't change
         run: |
