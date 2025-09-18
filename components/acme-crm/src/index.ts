@@ -8,7 +8,7 @@ const listUsers = action({
   inputs: {
     endpoint: input({
       type: "string",
-      default: "https://jsonplaceholder.typicode.com/users/a",
+      default: "https://jsonplaceholder.typicode.com/users/",
       label: "Users Endpoint",
       clean: util.types.toString,
     }),
