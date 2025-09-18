@@ -27,7 +27,7 @@ jobs:
         working-directory: components/acme-crm
         if: steps.filter.outputs.acme_component == 'true'
       - name: Publish Acme CRM Component
-        uses: prismatic-io/component-publisher@tr/print-output
+        uses: prismatic-io/component-publisher@v1.4
         with:
           COMPONENT_PATH: components/acme-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
@@ -60,7 +60,7 @@ jobs:
         working-directory: components/hooli-crm
         if: steps.filter.outputs.hooli_component == 'true'
       - name: Publish Hooli CRM Component
-        uses: prismatic-io/component-publisher@v1.3
+        uses: prismatic-io/component-publisher@v1.4
         with:
           COMPONENT_PATH: components/hooli-crm
           PRISMATIC_URL: ${{ vars.PRISMATIC_URL }}
