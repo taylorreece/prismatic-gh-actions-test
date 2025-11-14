@@ -1,0 +1,68 @@
+name: Testing multi-tenant auth
+description: Testing stuff. Will delete later
+
+on: push
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4.0.3
+        with:
+          node-version: '22'
+      - name: Install and build
+        run: |
+          cd multi-tenant-testing
+          for file in $(ls); do
+            echo "Installing dependencies for $file"
+            cd $file
+            npm install
+            npm run build
+            cd ..
+          done
+      - name: Publish component - no tenant ID
+        uses: prismatic-io/component-publisher@tr/add-prismatic-tenant-id
+        with:
+          COMPONENT_PATH: multi-tenant-testing/component-no-tenant-id
+          PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
+          PRISM_REFRESH_TOKEN: ${{ secrets.CA_PRISM_REFRESH_TOKEN }}
+          COMMENT: Publishing component without tenant ID
+      - name: Publish component - with tenant ID 1
+        uses: prismatic-io/component-publisher@tr/add-prismatic-tenant-id
+        with:
+          COMPONENT_PATH: multi-tenant-testing/component-tenant-id-1
+          PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
+          PRISM_REFRESH_TOKEN: ${{ secrets.CA_PRISM_REFRESH_TOKEN }}
+          PRISMATIC_TENANT_ID: ${{ vars.CA_PRISMATIC_TENANT_ID_1 }}
+          COMMENT: Publishing component with tenant ID 1
+      - name: Publish component - with tenant ID 2
+        uses: prismatic-io/component-publisher@tr/add-prismatic-tenant-id
+        with:
+          COMPONENT_PATH: multi-tenant-testing/component-tenant-id-2
+          PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
+          PRISM_REFRESH_TOKEN: ${{ secrets.CA_PRISM_REFRESH_TOKEN }}
+          PRISMATIC_TENANT_ID: ${{ vars.CA_PRISMATIC_TENANT_ID_2 }}
+          COMMENT: Publishing component with tenant ID 2
+      - name: Publish cni - no tenant ID
+        uses: prismatic-io/integration-publisher@tr/add-prismatic-tenant-id
+        with:
+          CNI_PATH: multi-tenant-testing/integration-no-tenant-id
+          PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
+          PRISM_REFRESH_TOKEN: ${{ secrets.CA_PRISM_REFRESH_TOKEN }}
+      - name: Publish cni - with tenant ID 1
+        uses: prismatic-io/integration-publisher@tr/add-prismatic-tenant-id
+        with:
+          CNI_PATH: multi-tenant-testing/integration-tenant-id-1
+          PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
+          PRISM_REFRESH_TOKEN: ${{ secrets.CA_PRISM_REFRESH_TOKEN }}
+          PRISMATIC_TENANT_ID: ${{ vars.CA_PRISMATIC_TENANT_ID_1 }}
+      - name: Publish cni - with tenant ID 2
+        uses: prismatic-io/integration-publisher@tr/add-prismatic-tenant-id
+        with:
+          CNI_PATH: multi-tenant-testing/integration-tenant-id-2
+          PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
+          PRISM_REFRESH_TOKEN: ${{ secrets.CA_PRISM_REFRESH_TOKEN }}
+          PRISMATIC_TENANT_ID: ${{ vars.CA_PRISMATIC_TENANT_ID_2 }}
+          
