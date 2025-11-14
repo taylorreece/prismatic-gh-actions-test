@@ -12,16 +12,16 @@ jobs:
         uses: actions/setup-node@v4.0.3
         with:
           node-version: '22'
-      - name: Install and build
-        run: |
-          cd multi-tenant-testing
-          for file in $(ls); do
-            echo "Installing dependencies for $file"
-            cd $file
-            npm install
-            npm run build
-            cd ..
-          done
+      # - name: Install and build
+      #   run: |
+      #     cd multi-tenant-testing
+      #     for file in $(ls); do
+      #       echo "Installing dependencies for $file"
+      #       cd $file
+      #       npm install
+      #       npm run build
+      #       cd ..
+      #     done
       - name: Publish component - no tenant ID
         uses: prismatic-io/component-publisher@tr/add-prismatic-tenant-id
         with:
