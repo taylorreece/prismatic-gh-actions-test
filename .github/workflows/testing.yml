@@ -23,14 +23,14 @@ jobs:
       #       cd ..
       #     done
       - name: Publish component - no tenant ID
-        uses: prismatic-io/component-publisher@1.5
+        uses: prismatic-io/component-publisher@v1.5
         with:
           COMPONENT_PATH: multi-tenant-testing/component-no-tenant-id
           PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.CA_PRISM_REFRESH_TOKEN }}
           COMMENT: Publishing component without tenant ID
       - name: Publish component - with tenant ID 1
-        uses: prismatic-io/component-publisher@1.5
+        uses: prismatic-io/component-publisher@v1.5
         with:
           COMPONENT_PATH: multi-tenant-testing/component-tenant-id-1
           PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
@@ -38,7 +38,7 @@ jobs:
           PRISMATIC_TENANT_ID: ${{ vars.CA_PRISMATIC_TENANT_ID_1 }}
           COMMENT: Publishing component with tenant ID 1
       - name: Publish component - with tenant ID 2
-        uses: prismatic-io/component-publisher@1.5
+        uses: prismatic-io/component-publisher@v1.5
         with:
           COMPONENT_PATH: multi-tenant-testing/component-tenant-id-2
           PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
@@ -46,14 +46,14 @@ jobs:
           PRISMATIC_TENANT_ID: ${{ vars.CA_PRISMATIC_TENANT_ID_2 }}
           COMMENT: Publishing component with tenant ID 2
       - name: Publish cni - no tenant ID
-        uses: prismatic-io/integration-publisher@1.5
+        uses: prismatic-io/integration-publisher@v1.5
         with:
           PATH_TO_CNI: multi-tenant-testing/integration-no-tenant-id
           INTEGRATION_ID: SW50ZWdyYXRpb246MWUzZTdiMWYtOTFlMy00YTQ4LWJkODYtMjE5NTAzZWQzNjBj
           PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
           PRISM_REFRESH_TOKEN: ${{ secrets.CA_PRISM_REFRESH_TOKEN }}
       - name: Publish cni - with tenant ID 1
-        uses: prismatic-io/integration-publisher@1.5
+        uses: prismatic-io/integration-publisher@v1.5
         with:
           PATH_TO_CNI: multi-tenant-testing/integration-tenant-id-1
           INTEGRATION_ID: SW50ZWdyYXRpb246ZmU3MzY0ODUtZmQxOC00OWY4LWEyYWMtOGJlOTk3MjQyNjIw
@@ -61,7 +61,7 @@ jobs:
           PRISM_REFRESH_TOKEN: ${{ secrets.CA_PRISM_REFRESH_TOKEN }}
           PRISMATIC_TENANT_ID: ${{ vars.CA_PRISMATIC_TENANT_ID_1 }}
       - name: Publish cni - with tenant ID 2
-        uses: prismatic-io/integration-publisher@1.5
+        uses: prismatic-io/integration-publisher@v1.5
         with:
           PATH_TO_CNI: multi-tenant-testing/integration-tenant-id-2
           PRISMATIC_URL: ${{ vars.CA_PRISMATIC_URL }}
