@@ -21,7 +21,7 @@ export default component({
   public: false,
   display: {
     label: "component-no-tenant-id",
-    description: "Prism-generated Component",
+    description: "Prism-generated Componenta",
     iconPath: "icon.png",
   },
   actions,
